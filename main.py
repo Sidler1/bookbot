@@ -1,4 +1,5 @@
 from stats import count_words_in_text, count_characters_in_text, sort_characters_by_frequency
+import sys
 
 
 def get_book_text(file_path: str) -> str:
@@ -25,8 +26,11 @@ def get_book_text(file_path: str) -> str:
 
 
 def main():
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
     print("============ BOOKBOT ============")
-    book_string = get_book_text("books/frankenstein.txt")
+    book_string = get_book_text(sys.argv[1])
     count_words_in_text(book_string)
     character_count = count_characters_in_text(book_string)
     sort_characters_by_frequency(character_count)
