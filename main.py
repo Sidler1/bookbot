@@ -1,3 +1,6 @@
+from stats import count_words_in_text, count_characters_in_text, sort_characters_by_frequency
+
+
 def get_book_text(file_path: str) -> str:
     """
     Read and return the contents of a text file.
@@ -13,32 +16,22 @@ def get_book_text(file_path: str) -> str:
         str: The contents of the file as a string if successful,
              or an error message if the file is not found.
     """
+    print(f"Analyzing book found at {file_path}...")
     try:
         with open(file_path, "r") as file:
             return file.read()
     except FileNotFoundError:
         return f"File not found: {file_path}"
 
-def count_words_in_text(text: str) -> int:
-    """
-    Count the number of words in a given text.
-
-    This function takes a string of text as input, splits it into words,
-    and returns the total number of words found.
-
-    Args:
-        text (str): The input text to be analyzed.
-
-    Returns:
-        int: The number of words in the input text.
-    """
-    words = text.split()
-    return len(words)
 
 def main():
+    print("============ BOOKBOT ============")
     book_string = get_book_text("books/frankenstein.txt")
-    word_count = count_words_in_text(book_string)
-    print(f"{word_count} words found in the document")
+    count_words_in_text(book_string)
+    character_count = count_characters_in_text(book_string)
+    sort_characters_by_frequency(character_count)
+    print("============= END ===============")
     pass
+
 
 main()
